@@ -26,7 +26,7 @@ public class BFS2D {
 	public void bfs(int sx,int sy) {
 		Qx = new ArrayDeque<Integer>();
 		Qy = new ArrayDeque<Integer>();
-		visited[sx][sy] = true;
+		visited[sy][sx] = true;
 		Qx.add(sx);
 		Qy.add(sy);
 		while(!Qx.isEmpty()) {

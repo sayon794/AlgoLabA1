@@ -2,6 +2,6 @@
 
 public class Main {
 	public static void main(String args[]) {
-		new UVA_11709();
+		new UVA_439();
 	}
 }
