@@ -66,6 +66,8 @@ public class ArtPoint {
                 	AP[u] = true;
                 	artCount++;
                 }
+                if(nodes[v].low > nodes[u].discovery)
+                	nodes[v].list.get(i).cost = -1; //setting bridge
 			}
         	else if(nodes[v].discovery < nodes[u].low)
         		nodes[u].low = nodes[v].discovery;

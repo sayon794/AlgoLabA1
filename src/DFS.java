@@ -25,6 +25,7 @@ public class DFS {
 		for(int i=0;i<nodes[u].list.size();i++) {
 			int v = nodes[u].list.get(i).to;
 			if(!nodes[v].visited) {
+				nodes[v].parent = u;
 				dfs(v);
 			}
 		}

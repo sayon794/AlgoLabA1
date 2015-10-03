@@ -20,6 +20,7 @@ public class BFS {
 				if(!nodes[v].visited) {
 					nodes[v].visited = true;
 					nodes[v].dist = nodes[u].dist+1;
+					nodes[u].parent = v;
 					Q.add(v);
 				}
 			}

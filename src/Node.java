@@ -5,6 +5,7 @@ public class Node {
 	
 	public String name;
 	public int discovery,finishing,dist,parent,low;
+	public int number;
 	public boolean visited;
 	public ArrayList<Edge> list = new ArrayList<Edge>();
 	

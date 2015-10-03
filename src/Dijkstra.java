@@ -40,6 +40,7 @@ public class Dijkstra {
 				int w = nodes[u].list.get(i).cost;
 				if(nodes[v].discovery==-1 || nodes[u].discovery+w < nodes[v].discovery) {
 					nodes[v].discovery = nodes[u].discovery + w;
+					nodes[v].parent = u;
 					PQ.offer(new Pair(v, nodes[v].discovery));
 				}
 			}
