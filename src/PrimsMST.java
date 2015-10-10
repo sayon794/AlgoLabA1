@@ -2,12 +2,12 @@ import java.util.Comparator;
 import java.util.PriorityQueue;
 
 
-public class MST {
+public class PrimsMST {
 	private Node nodes[];
 	private int N;
 	private PriorityQueue<Node> PQ;
 	
-	public MST(Node nodes[],int N) {
+	public PrimsMST(Node nodes[],int N) {
 		this.nodes = nodes;
 		this.N = N;
 		PQ = new PriorityQueue<Node>(N,new Comparator<Node>() {
@@ -17,7 +17,7 @@ public class MST {
 		});
 	}
 	
-	public MST(Node nodes[]) { this(nodes,nodes.length); }
+	public PrimsMST(Node nodes[]) { this(nodes,nodes.length); }
 	
 	public void makeTree() {
 		nodes[1].dist = 0;
