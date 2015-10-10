@@ -1,3 +1,5 @@
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.HashMap;
@@ -6,13 +8,21 @@ import java.util.Scanner;
 
 public class UVA_10199 {
 	public UVA_10199() {
+		FileReader file = null;
+		try {
+			file = new FileReader("10199.txt");
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		int N,E,cas=0;
-		Scanner S = new Scanner(System.in);
-		HashMap<String,Integer> map = new HashMap<String,Integer>();
+		Scanner S = new Scanner(file);
+		HashMap<String,Integer> map;
 		Node nodes[];
 		String u,v;
 		
 		while((N = S.nextInt())!=0) {
+			map = new HashMap<String,Integer>();
 			S.nextLine();
 			
 			nodes = new Node[N+1];

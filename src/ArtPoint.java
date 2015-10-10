@@ -1,15 +1,27 @@
-
+import java.util.Comparator;
+import java.util.PriorityQueue;
 
 public class ArtPoint {
 	private Node nodes[];
 	private int N,time,artCount;
 	private int currentRoot,rootChildren;
 	private boolean AP[];
+	private PriorityQueue<Pair> PQ = null;
+	public int bridgeCount=0;
 	
 	public ArtPoint(Node nodes[],int N) { 
 		this.nodes = nodes;
 		this.N = N;
 		AP = new boolean[N];
+	}
+	
+	public ArtPoint(Node nodes[]) {
+		this(nodes,nodes.length);
+	}
+	
+	public ArtPoint(Node nodes[],Comparator<Pair> comp) {
+		this(nodes);
+		PQ = new PriorityQueue<Pair>(N,comp);
 	}
 	
 	public void init() {
@@ -21,10 +33,6 @@ public class ArtPoint {
 		}
 		time=0;
 		artCount=0;
-	}
-	
-	public ArtPoint(Node nodes[]) {
-		this(nodes,nodes.length);
 	}
 	
 	public int[] articulationPoints() {
@@ -50,6 +58,11 @@ public class ArtPoint {
             }
     }
 	
+	public PriorityQueue<Pair> bridges() {
+		dfsAll();
+		return PQ;
+	}
+	
 	private void dfs(int u) {
 		nodes[u].visited = true;
 		nodes[u].discovery = ++time;
@@ -57,6 +70,7 @@ public class ArtPoint {
 		for(int i=0;i<nodes[u].list.size();i++) {
 			int v = nodes[u].list.get(i).to;
 			if(!nodes[v].visited) {
+				nodes[v].parent = u;
 				dfs(v);
 				if(u == currentRoot)
                 	rootChildren++;
@@ -66,10 +80,17 @@ public class ArtPoint {
                 	AP[u] = true;
                 	artCount++;
                 }
-                if(nodes[v].low > nodes[u].discovery)
-                	nodes[v].list.get(i).cost = -1; //setting bridge
+                if(nodes[v].low > nodes[u].discovery) {
+                	//System.out.println("here");
+                	bridgeCount++;
+                	nodes[u].list.get(i).bridge = true; //setting bridge
+                	if(PQ == null) continue;
+                	if(u<v)
+                		PQ.offer(new Pair(u,v));
+                	else PQ.offer(new Pair(v,u));		//UVA_796
+                }
 			}
-        	else if(nodes[v].discovery < nodes[u].low)
+        	else if(nodes[v].discovery < nodes[u].low && nodes[u].parent!=v)
         		nodes[u].low = nodes[v].discovery;
 		}
 		nodes[u].finishing = ++time;

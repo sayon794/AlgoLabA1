@@ -1,12 +1,21 @@
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.util.HashMap;
 import java.util.Scanner;
 
 
 public class UVA_11709 {
 	public UVA_11709() {
+		FileReader file = null;
+		try {
+			file = new FileReader("11709.txt");
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		Node G[],Gt[];
 		int n,m;
-		Scanner S = new Scanner(System.in);
+		Scanner S = new Scanner(file);
 		HashMap<String,Integer> map;
 		String str1,str2;
 		

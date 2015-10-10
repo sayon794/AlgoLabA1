@@ -1,9 +1,18 @@
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.util.Scanner;
 
 
 public class UVA_439 {
 	public UVA_439() {
-		Scanner S = new Scanner(System.in);
+		FileReader file = null;
+		try {
+			file = new FileReader("439.txt");
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		Scanner S = new Scanner(file);
 		BFS2D B;
 		String u,v;
 		int dx[] = {-2,-1,1,2,-2,-1,1,2};

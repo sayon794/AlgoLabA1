@@ -1,12 +1,21 @@
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.util.Scanner;
 
 
 public class UVA_423 {
 	public UVA_423() {
+		FileReader file = null;
+		try {
+			file = new FileReader("423.txt");
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		Node nodes[];
 		int N,u,v,c;
 		String str;
-		Scanner S = new Scanner(System.in);
+		Scanner S = new Scanner(file);
 		N = S.nextInt();
 		
 		nodes = new Node[N+1];

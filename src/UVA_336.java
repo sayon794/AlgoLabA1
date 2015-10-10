@@ -1,4 +1,6 @@
 
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.util.HashMap;
 import java.util.Scanner;
 
@@ -9,7 +11,14 @@ public class UVA_336 {
 	int N,a,b,cas=1,nc=0;
 	
 	public UVA_336() {
-		Scanner S = new Scanner(System.in);
+		FileReader file = null;
+		try {
+			file = new FileReader("336.txt");
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		Scanner S = new Scanner(file);
 		
 		while((N = S.nextInt())!=0) {
 			nc = 0;

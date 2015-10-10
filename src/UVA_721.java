@@ -1,11 +1,20 @@
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.util.Scanner;
 
 
 public class UVA_721 {
 	public UVA_721() {
+		FileReader file = null;
+		try {
+			file = new FileReader("721.txt");
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		int t,N,E,u,v,c;
 		Node nodes[],tnodes[];
-		Scanner S = new Scanner(System.in);
+		Scanner S = new Scanner(file);
 		t = S.nextInt();
 		while(t-- >0) {
 			N = S.nextInt();

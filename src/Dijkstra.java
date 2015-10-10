@@ -3,10 +3,6 @@ import java.util.PriorityQueue;
 
 
 public class Dijkstra {
-	class Pair {
-		public int node,disc;
-		Pair(int n, int d) { node = n; disc = d; }
-	}
 	
 	private Node nodes[];
 	private int N,d[];
@@ -17,20 +13,21 @@ public class Dijkstra {
 		this.N = N;
 		PQ = new PriorityQueue<Pair>(N,new Comparator<Pair>() {
 			public int compare(Pair u, Pair v) {
-				return u.disc - v.disc;
+				return u.y - v.y;
 			}
 		});
 	}
 	
 	public Dijkstra(Node nodes[]) { this(nodes,nodes.length); }
 	
-	public void shortestPath(int source) {
-		init();
+	public void shortestPath(int source,boolean reset) {
+		if(reset)
+			init();
 		nodes[source].discovery = 0;
 		PQ.offer(new Pair(source, nodes[source].discovery));
 		
 		while(!PQ.isEmpty()) {
-			int u = PQ.poll().node;
+			int u = PQ.poll().x;
 			if(nodes[u].visited)
 				continue;
 			
@@ -47,8 +44,24 @@ public class Dijkstra {
 		}
 	}
 	
-	private void init() {
-		for(int i=0;i<N;i++)
+	public void shortestPath(int source) { shortestPath(source,true); }
+	
+	public void init() {
+		for(int i=0;i<N;i++) {
 			nodes[i].discovery = -1;
+			nodes[i].visited = false;
+		}
+	}
+	
+	public int[] getDistances() { 
+		d = new int[N];
+		for(int i=0;i<N;i++)
+			d[i] = nodes[i].discovery;
+		return d;
+	}
+	
+	public void setDistances(int d[]) {
+		for(int i=0;i<N;i++)
+			nodes[i].discovery = d[i];
 	}
 }

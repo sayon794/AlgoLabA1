@@ -1,45 +1,47 @@
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.util.Scanner;
-import java.util.Stack;
 
 
-public class UVA_10305 {
-	public UVA_10305() {
+public class UVA_11518 {
+	public UVA_11518() {
 		FileReader file = null;
 		try {
-			file = new FileReader("10305.txt");
+			file = new FileReader("11518.txt");
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		int n,m,u,v;
+		int t,n,m,l,u,v,ans;
+		Node nodes[];
 		Scanner S = new Scanner(file);
-		
-		while(true) {
+		t = S.nextInt();
+		while(t--!=0) {
 			n = S.nextInt();
 			m = S.nextInt();
+			l = S.nextInt();
 			
-			if(n==0&&m==0) break;
-			
-			Node nodes[] = new Node[n+1];
+			nodes = new Node[n+1];
 			for(int i=0;i<=n;i++)
 				nodes[i] = new Node();
-		
+			
 			for(int i=0;i<m;i++) {
 				u = S.nextInt();
 				v = S.nextInt();
 				nodes[u].connect(v);
 			}
-			
 			DFS D = new DFS(nodes);
-			D.dfsAll();
-			Stack<Integer> stk = D.getTopoSort();
-			
-			while(!stk.isEmpty()) {
-				System.out.print(stk.pop() + " ");
+			for(int i=0;i<l;i++) {
+				u = S.nextInt();
+				D.dfsFrom(u);
 			}
-			System.out.println();
+			ans = 0;
+			for(int i=1;i<=n;i++) {
+				if(nodes[i].visited)
+					ans++;
+			}
+			
+			System.out.println(ans);
 		}
 	}
 }

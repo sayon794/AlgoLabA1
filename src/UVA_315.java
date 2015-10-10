@@ -1,9 +1,18 @@
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.util.Scanner;
 
 
 public class UVA_315 {
 	public UVA_315() {
-		Scanner S = new Scanner(System.in);
+		FileReader file = null;
+		try {
+			file = new FileReader("315.txt");
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		Scanner S = new Scanner(file);
 		Scanner sub = null;
 		int N,u,v;
 		String line;
@@ -26,7 +35,7 @@ public class UVA_315 {
 			}
 			
 			ArtPoint AP = new ArtPoint(nodes);
-			System.out.println(AP.articulationPoints().length-1);
+			System.out.println(AP.articulationPoints().length);
 		}
 	}
 }
