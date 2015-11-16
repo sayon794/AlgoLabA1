@@ -1,13 +1,24 @@
-
-
+import java.util.Scanner;
 
 public class Main {
 	public static void main(String args[]) {
-		int A[][] = { {3,2,5,4,8},
-					  {5,7,5,6,1},
-					  {4,4,6,2,3},
-					  {2,8,9,5,8} };
-		RockClimbing RC = new RockClimbing(A);
-		System.out.println(RC.climb());
+		Scanner S = new Scanner(System.in);
+		int v = S.nextInt();
+		int e = S.nextInt();
+		WeightedGraph G = new WeightedGraph(v);
+		int a, b, c;
+		for (int i = 0; i < e; i++) {
+			a = S.nextInt();
+			b = S.nextInt();
+			c = S.nextInt();
+			G.connect(a, b, c);
+		}
+		FloydWarshall FW = new FloydWarshall(G);
+		FW.APSP();
+		a = S.nextInt();
+		b = S.nextInt();
+		System.out.println("Shortest Distance: "+FW.getDist(a, b));
+		System.out.println("Path:");
+		FW.printPath(a, b);
 	}
 }
